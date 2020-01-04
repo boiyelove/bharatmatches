@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="container">
+       
+                    {% if form.errors %}
+                 {% comment comment1 %}
+                {% for field in form %}
+
+                        {% for error in field.errors %}
+                                        <div class="row alert alert-danger" role="alert">
+                                <div class="container">
+                                                {{ field.name }}: {{ error|escape }}
+                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                            </div>
+                        {% endfor  %}
+
+                {% endfor %}
+                
+        {% endcomment %}
+       
+                   {% for error in form.non_field_errors %}
+                                        <div class="row alert alert-danger" role="alert">
+                                <div class="container">
+                                                       {{ error|escape }}
+                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                            </div>
+                        {% endfor  %}
+            {% endif %}
+
+        <div class="row">
+            <form action="{% url 'account_signup' %}" method="post">
+                        <h3>Register</h3>                        <div class="form-row">
+                            <div class="col-md-6">
+                                
+                                {{ form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6">
+                                
+                                {{ form.last_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">                                  
+                            
+                            {{ form.date_of_birth|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                             <div class="col-md-12">
+                            {{ form.email|as_crispy_field }}
+                        </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                            
+                            {{ form.password1|as_crispy_field }}
+                            </div>
+ 
+                            <div class="col-md-6">
+                            
+                            {{ form.password2|as_crispy_field }}
+                            </div>
+                        </div>
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <Recaptcha>Recatpcha</Recaptcha>
+                        </div>
+                        <div class="row text-center">
+                            <button class="btn btn-success col-md-6 mx-auto">
+                                Signup
+                            </button>
+
+                            <br/>
+                            <a href="#">I already have an account</a>
+                        </div>
+                    </form>     
+        </div>
+    </div>
+
+{% endblock %}
