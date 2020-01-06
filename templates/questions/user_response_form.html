@@ -14,7 +14,7 @@
 {% else %}
 <h3>Your answer</h3>
 {% endif %}
-{% for ans in instance.answer_set.all %}
+{% for ans in instance.answers.all %}
 <input type='radio' name='answer_id' value='{{ ans.id }}' {% if user_answer.my_answer.id == ans.id %}checked=checked{% endif %} /> {{ ans.text }} <br/>
 {% endfor %}
 
@@ -27,7 +27,7 @@ Importance: {{ form.importance_level }}
 {% else %}
 <h3>Their Answer</h3>
 {% endif %}
-{% for ans in instance.answer_set.all %}
+{% for ans in instance.answers.all %}
 <input type='radio' name='their_answer_id' value='{{ ans.id }}' {% if user_answer.their_answer.id == ans.id %}checked=checked{% endif %} /> {{ ans.text }} <br/>
 {% endfor %}
 <input type='radio' name='their_answer_id' value='-1' {% if not user_answer.their_answer %} checked=checked {% endif %} /> Holds no importance <br/>

@@ -9,7 +9,7 @@ class AnswerTabularInline(admin.TabularInline):
 	model = Answer
 
 class QuestionAdmin(admin.ModelAdmin):
-	inlines = [AnswerTabularInline]
+	# inlines = [AnswerTabularInline]
 	class Meta:
 		model = Question
 

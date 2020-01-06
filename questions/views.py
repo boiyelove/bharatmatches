@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 
-from matches.signals import user_matches_update
+from matcher.signals import user_matches_update
 
 from .forms import UserResponseForm
 from .models import Question, Answer, UserAnswer
@@ -12,7 +12,7 @@ from .models import Question, Answer, UserAnswer
 
 
 def single(request, id):
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 
 		queryset = Question.objects.all().order_by('-timestamp')
 		instance = get_object_or_404(Question, id=id)
@@ -32,7 +32,7 @@ def single(request, id):
 
 		form = UserResponseForm(request.POST or None)
 		if form.is_valid():
-				question_id = form.cleaned_data.get('question_id') 
+			question_id = form.cleaned_data.get('question_id') 
 			
 			answer_id = form.cleaned_data.get('answer_id')
 			importance_level = form.cleaned_data.get('importance_level')
@@ -88,22 +88,22 @@ def single(request, id):
 
 
 def home(request):
-	if request.user.is_authenticated():
-		form = UserResponseForm(request.POST or None)
-		if form.is_valid():
-			question_id = form.cleaned_data.get('question_id') #form.cleaned_data['question_id']
-			answer_id = form.cleaned_data.get('answer_id')
-			question_instance = Question.objects.get(id=question_id)
-			answer_instance = Answer.objects.get(id=answer_id)
-			print answer_instance.text, question_instance.text
+	# if request.user.is_authenticated():
+	form = UserResponseForm(request.POST or None)
+	if form.is_valid():
+		question_id = form.cleaned_data.get('question_id') #form.cleaned_data['question_id']
+		answer_id = form.cleaned_data.get('answer_id')
+		question_instance = Question.objects.get(id=question_id)
+		answer_instance = Answer.objects.get(id=answer_id)
+		
 
-		queryset = Question.objects.all().order_by('-timestamp')
-		instance = queryset[1]
-		context = {
-			"form": form,
-			"instance": instance,
-			#"queryset": queryset
-		}
-		return render(request, "questions/home.html", context)
-	else:
-		raise Http404
+	queryset = Question.objects.all().order_by('-timestamp')
+	instance = queryset[1]
+	context = {
+		"form": form,
+		"instance": instance,
+		#"queryset": queryset
+	}
+	return render(request, "questions/home.html", context)
+	# else:
+	# 	raise Http404

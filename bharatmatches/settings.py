@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
 
     'profiles.apps.ProfilesConfig',
+    'questions',
 ]
 
 MIDDLEWARE = [
