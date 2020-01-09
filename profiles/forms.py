@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import MatchUser, BannedEmail
+from .models import MatchUser, BannedEmail, MatchUserPreference, MatchUserAddress, MatchUserProfile
 from .utils import calculate_age
 
 class RegistrationForm(UserCreationForm, forms.ModelForm):
@@ -45,3 +45,23 @@ class RegistrationForm(UserCreationForm, forms.ModelForm):
 			return user
 
 
+class PreferenceForm(forms.ModelForm):
+	class Meta:
+		model =  MatchUserPreference
+		fields = ('age_lower', 'age_higher', 'states')
+
+
+class UserProfileForm(forms.ModelForm):
+	class Meta:
+		model =  MatchUserProfile
+		fields = ('marital_status', 'gender')
+
+class UserAddressForm(forms.ModelForm):
+	class Meta:
+		model =  MatchUserAddress
+		fields = ('city', 'state', 'country')
+
+class UserBioForm(forms.ModelForm):
+	class Meta:
+		model = MatchUserProfile
+		fields = ('bio',)

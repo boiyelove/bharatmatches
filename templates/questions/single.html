@@ -1,11 +1,18 @@
-{% extends "base.html" %}
+{% extends "dashbody.html" %}
+{% load staticfiles %}
 
 
 
-{% block content %}
 
+
+		{% block dashbody %}
+	        <div class="row">
+        <div class="col-md-12">
+            <div>
 
 {% include "questions/user_response_form.html" with instance=instance form=form %}
 
-
-{% endblock %}
+	</div>
+</div>
+</div>
+		{% endblock %}

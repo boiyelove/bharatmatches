@@ -18,10 +18,9 @@
 <input type='radio' name='answer_id' value='{{ ans.id }}' {% if user_answer.my_answer.id == ans.id %}checked=checked{% endif %} /> {{ ans.text }} <br/>
 {% endfor %}
 
-<br/>
 Importance: {{ form.importance_level }}
 
-
+<hr/>
 {% if title_size %}
 <h{{ title_size|add:1 }}>Their Answer</h{{ title_size|add:1 }}>
 {% else %}
@@ -37,7 +36,10 @@ Importance: {{ form.importance_level }}
 Importance: {{ form.their_importance_level }} <br/><br/>
 
 
-<input class='btn btn-primary' type='submit' value='Save and continue' />
+<div class="row">
+	<div class="col-md-6"><input class='btn btn-primary' type='submit' name='save-and-continue' value='Save and continue' /></div>
+	<div class="col-md-6 text-right"><a href="#" class='btn btn-primary'>Skip to Profile</a></div>
+</div>
 
 
 

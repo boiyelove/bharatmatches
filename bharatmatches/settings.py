@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'allauth.account',
 
     'profiles.apps.ProfilesConfig',
-    'questions',
+    'questions.apps.QuestionsConfig',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +146,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+from django.urls import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('question_home')
 
